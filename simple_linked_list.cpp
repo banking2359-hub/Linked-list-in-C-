@@ -40,6 +40,28 @@ void deleteFront(Node *&head)
     head = head->next;
     delete temp;
 }
+void deleteEnd(Node *head)
+{
+    if (head == nullptr)
+    {
+        cout << "Empty node";
+        return;
+    }
+    Node *temp = head;
+
+    if (temp->next == nullptr)
+    {
+        deleteFront(temp);
+        return;
+    }
+
+    while (temp->next != nullptr)
+    {
+        temp = temp->next;
+    }
+    temp->prev->next = nullptr;
+    delete temp;
+}
 
 
 int main()
