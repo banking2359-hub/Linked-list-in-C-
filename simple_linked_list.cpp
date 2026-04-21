@@ -63,7 +63,30 @@ void deleteEnd(Node *head)
     delete temp;
 }
 
+void deleteMiddle(Node *head, int pos)
+{
+    if (head == nullptr)
+    {
+        cout << "Empty node";
+        return;
+    }
+    Node *temp = head;
 
+    if (temp->next == nullptr)
+    {
+        deleteFront(head);
+        return;
+    }
+    for (int i = 1; i < pos; i++)
+    {
+        if (temp->next == nullptr)
+            break;
+        temp = temp->next;
+    }
+    temp->next->prev = temp->prev;
+    temp->prev->next = temp->next->prev;
+    delete temp;
+}
 int main()
 {
     Node *head = nullptr;
@@ -73,7 +96,7 @@ int main()
 
     cout << "List contents: ";
 
-    deleteFront(head);
+    deleteMiddle(head, 2);
     while (head != nullptr)
     {
         cout << head->data << " ";
