@@ -57,6 +57,29 @@ void pushFront(Node *&head, int data)
     head->prev = newNode;
     head = newNode;
 }
+void pushingToMid(Node *head, int data, int pos)
+{
+    Node *newNode = new Node;
+    newNode->data = data;
+    if (head == nullptr)
+    {
+        head = newNode;
+        head->next = nullptr;
+        return;
+    }
+    Node *temp;
+    temp = head;
+    for (int i = 1; i < pos - 1; i++)
+    {
+        if (temp->next != nullptr)
+            temp = temp->next;
+    }
+
+    newNode->next = temp->next;
+    temp->next->prev = newNode;
+    temp->next = newNode;
+    newNode->prev = temp;
+}
 int main()
 {
     Node *head = nullptr;
@@ -67,5 +90,6 @@ int main()
     pushEnd(head, 5);
     pushFront(head, 0);
     pushFront(head, -1);
+    pushingToMid(head,10,3);
     display(head);
 }
